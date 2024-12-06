@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vi 'N Jinx</title>
+  <style>
+ 
+  header {
+    background: #333;
+    color: #fff;
+    padding: .3em 0;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 .3em;
+  }
+  
+  .nav-links {
+    display: flex;
+    list-style: none;
+  }
+  
+  .nav-links li {
+    margin: 0 1em;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s;
+  }
+  
+  .nav-links a:hover {
+    color: #f4a261;
+  }
+  
+  .hamburger {
+    display: none;
+    cursor: pointer;
+  }
+  .hero {
+  text-align: center;
+  color: white;
+  padding: 150px 20px;  /* Adjust padding for better spacing */
+  background-color: #342424;  /* Fallback background color */
+  background-image: url('flat-lay-notebook-with-shopping-bag-cyber-monday-tag.jpg');  /* Background image */
+  background-size: cover;  /* Ensures the image covers the entire hero section */
+  background-position: center center;  /* Centers the image */
+  background-repeat: no-repeat;  /* Prevents the image from repeating */
+  position: relative;  /* Needed for absolute positioning of overlay */
+  overflow: hidden;  /* Prevents overflow outside the section */
+  transition: background 0.5s ease-in-out;  /* Smooth transition for background on hover */
+}
+
+.hero::before {
+  content: '';  /* Empty pseudo-element */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);  /* Slightly stronger dark overlay */
+  z-index: 1;  /* Overlay sits below text and button */
+  opacity: 0;  /* Initially hidden overlay */
+  transition: opacity 1s ease-out;  /* Smooth fade-in of overlay */
+}
+
+.hero:hover::before {
+  opacity: 1;  /* Overlay fades in when the hero section is hovered */
+}
+
+.hero h1, .hero p {
+  z-index: 2;  /* Ensures text is above the overlay */
+  position: relative;  /* Position relative so the z-index works */
+  opacity: 0;  /* Start with invisible text */
+  animation: fadeInUp 1s ease-out forwards;  /* Animate text with fade-in and slide-up */
+}
+
+.hero h1 {
+  font-size: 3.5em;  /* Larger font size for the title */
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  animation-delay: 0.5s;  /* Delays animation for a staggered effect */
+}
+
+.hero p {
+  font-size: 1.2em;  /* Larger font size for the description */
+  margin-bottom: 30px;
+  animation-delay: 1s;  /* Delays animation for a staggered effect */
+}
+
+.hero .btn {
+  text-decoration: none;
+  background: linear-gradient(90deg, #f4a261, #e76f51);  /* Gradient button */
+  color: white;
+  padding: 1.2em 2.5em;  /* Increased padding for a larger button */
+  border-radius: 50px;  /* More rounded button */
+  font-size: 1.3em;  /* Larger button text */
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  z-index: 3;  /* Ensures the button is above everything else */
+  position: relative;  /* Ensures the z-index works */
+}
+
+.hero .btn:hover {
+  background: linear-gradient(90deg, #e76f51, #f4a261);  /* Reversed gradient on hover */
+  transform: translateY(-5px);  /* Slight 3D effect (button raises on hover) */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);  /* Adds shadow for more depth */
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 120px 10px;  /* Reduced padding for smaller screens */
+  }
+
+  .hero h1 {
+    font-size: 2.5em;  /* Smaller title size for mobile */
+  }
+
+  .hero p {
+    font-size: 1.1em;  /* Slightly smaller paragraph font for mobile */
+  }
+
+  .hero .btn {
+    padding: 1em 2em;  /* Slightly smaller button for mobile */
+    font-size: 1.1em;  /* Slightly smaller button text for mobile */
+  }
+}
+
+.section {
+  padding: 3em 2em; /* Increased padding for better spacing */
+  max-width: 1200px; /* Max-width to ensure sections don't stretch too much on large screens */
+  margin: 0 auto; /* Centers the section horizontally */
+  background-color: #f9f9f9; /* Subtle background color for visual separation */
+  border-radius: 10px; /* Rounded corners for a modern look */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition on hover */
+}
+
+.section:hover {
+  transform: translateY(-5px); /* Slight lift effect on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+/* Typography Adjustments */
+.section h2 {
+  font-size: 2.5em; /* Larger heading for better visibility */
+  font-weight: bold; /* Bold heading for emphasis */
+  margin-bottom: 1em; /* Spacing below the heading */
+  color: #333; /* Darker text color for contrast */
+  text-align: center; /* Center-aligned heading */
+}
+
+.section p {
+  font-size: 1.2em; /* Slightly larger text for better readability */
+  line-height: 1.6; /* Increased line height for clarity */
+  color: #555; /* Slightly lighter text color for paragraphs */
+  text-align: center; /* Center-aligning the paragraph text */
+  max-width: 900px; /* Limit the width for readability */
+  margin: 0 auto 1.5em; /* Centering and spacing below the paragraph */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .section {
+    padding: 2em 1.5em; /* Reduced padding for smaller screens */
+  }
+
+  .section h2 {
+    font-size: 2em; /* Adjust heading size for smaller screens */
+  }
+
+  .section p {
+    font-size: 1em; /* Adjust paragraph size for readability */
+    padding: 0 1.5em; /* Add some padding on smaller screens for better text flow */
+  }
+}
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1em;
+  }
+  
+  .button-link {
+  display: block;
+  padding: 1.5em;
+  background: #bac4c6;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.button-link:hover {
+  background: #e0e0e0;
+  transform: scale(1.05);
+}
+  
+  footer {
+    text-align: center;
+    background: #333;
+    color: white;
+    padding: .1em 0;
+  }
+  
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      background: #333;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      width: 100%;
+      text-align: center;
+    }
+  
+    .nav-links.active {
+      display: flex;
+    }
+  
+    .hamburger {
+      display: block;
+      font-size: 1.5em;
+      color: white;
+    }
+  }
+  </style>
+</head>
+<body >
+  <header>
+    <nav class="navbar">
+      <div class="logo">Vi 'N Jinx</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+    </nav>
+  </header>
+  
+
+  <section id="home" class="hero">
+    <h1>Welcome to Vi 'N Jinx</h1>
+    <p>Explore our amazing products and services that make life easier and more enjoyable!</p>
+    <a href="#our products" class="btn">Shop Now!</a>
+  </section>
+
+
+  <section id="our products" class="section">
+    <h2>Our Products</h2>
+    <div class="grid-container">
+      <div class="grid-item">
+        <a href="mobile.html" class="button-link">Mobile</a>
+      </div>
+      <div class="grid-item">
+        <a href="tablets-computing.html" class="button-link">Tablets & Computing</a>
+      </div>
+      <div class="grid-item">
+        <a href="home-appliances.html" class="button-link">Home Appliances</a>
+      </div>
+      <div class="grid-item">
+        <a href="tv-audio.html" class="button-link">TV & Audio</a>
+      </div>
+    </div>
+  </section>
+
+
+
+    
+  <section id="about" class="section">
+    <h2>About Us</h2>
+    <p>Your source for high-quality gadgets at great prices. We are committed to exceptional customer service and a smooth shopping experience. Explore our selection and find your next favorite gadget today!</p>
+  </section>
+
+  <section id="contact" class="section">
+    <h2>Contact Us</h2>
+    <p>Email us at <a href="mailto:tech.keneme@gmail.com">Vi.N.Jinx@gmail.com</a></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Vi 'N' Jinx. All Rights Reserved.</p>
+  </footer>
+
+</body>
+</html>
