@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Items</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .product-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .product-image {
+        max-width: 100%;
+        max-height: 200px;
+        margin-bottom: 10px;
+      }
+
+      .product-details {
+        width: 100%;
+      }
+
+      .product-buttons {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .quantity-input {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+    }
+
+    .product-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .product-item {
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .product-item:hover {
+      transform: scale(1.03);
+    }
+
+    .product-image {
+      max-width: 150px;
+      max-height: 150px;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+
+    .product-details {
+      flex-grow: 1;
+    }
+
+    .product-details h3 {
+      margin: 0 0 10px;
+    }
+
+    .product-buttons {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .product-buttons button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .add-to-cart {
+      background-color: #f4a261;
+      color: white;
+    }
+
+    .add-to-cart:hover {
+      background-color: #e76f51;
+    }
+
+    .buy-now {
+      background-color: #2575fc;
+      color: white;
+    }
+
+    .buy-now:hover {
+      background-color: #6a11cb;
+    }
+
+    .delete-item {
+      background-color: #e63946;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .delete-item:hover {
+      background-color: #d6272f;
+    }
+
+    .undo-button {
+      background-color: #2d6a4f;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .undo-button:hover {
+      background-color: #1b4d37;
+    }
+
+    a {
+      display: block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .quantity-input {
+      width: 50px;
+      padding: 5px;
+      margin-right: 10px;
+    }
+
+    /* Image Preview Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding-top: 60px;
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 25px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #f1f1f1;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* Cart Summary */
+    .cart-summary {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tablet and Computer</h1>
+  <ul class="product-list" id="productList">
+    <!-- First Product -->
+    <li class="product-item" id="product-1">
+      <img src="tablet.jpg" alt="Galaxy S24 Ultra" class="product-image" onclick="openModal('tablet.jpg')">
+      <div class="product-details">
+        <h3>HONOR Pad 9</h3>
+        <p>High-quality mobile device with amazing features.</p>
+        <p><strong>Price: ₱199.00</strong></p>
+        <div class="product-buttons">
+          <input type="number" id="quantity-1" class="quantity-input" value="1" min="1">
+          <button class="add-to-cart" onclick="addToCart('HONOR Pad 9', 299.99, 'quantity-1')">Add to Cart</button>
+          <button class="buy-now" onclick="buyNow('HONOR Pad 9', 299.99)">Buy Now</button>
+          <button class="delete-item" onclick="deleteItem('product-1')">Delete Item</button>
+        </div>
+      </div>
+    </li>
+
+    <!-- Second Product -->
+    <li class="product-item" id="product-2">
+      <img src="OIP.jpg" alt="Apple Iphone 16 Pro max" class="product-image" onclick="openModal('OIP.jpg')">
+      <div class="product-details">
+        <h3>EXILE Gaming PC</h3>
+        <p>Sleek design and powerful performance.</p>
+        <p><strong>Price: ₱399.00</strong></p>
+        <div class="product-buttons">
+          <input type="number" id="quantity-2" class="quantity-input" value="1" min="1">
+          <button class="add-to-cart" onclick="addToCart('Apple Iphone 16 Pro max', 399.99, 'quantity-2')">Add to Cart</button>
+          <button class="buy-now" onclick="buyNow('Apple Iphone 16 Pro max', 399.99)">Buy Now</button>
+          <button class="delete-item" onclick="deleteItem('product-2')">Delete Item</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <a href="../index.html" class="back-button">
+    <span class="back-icon">&larr;</span> Back to Home
+  </a>
+  
+  <!-- Modal for Image Preview -->
+  <div id="imageModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <!-- Cart Summary Section -->
+  <div class="cart-summary">
+    <h3>Cart Summary</h3>
+    <p>Total Items: <span id="totalItems">0</span></p>
+    <p>Total Price: ₱<span id="totalPrice">0.00</span></p>
+  </div>
+
+  <script>
+    let deletedItems = [];
+    let cart = [];  // Array to store cart items
+
+    // JavaScript to handle Add to Cart and Buy Now buttons
+    function addToCart(productName, price, quantityId) {
+      const quantity = parseInt(document.getElementById(quantityId).value);
+      const totalPrice = (price * quantity).toFixed(2);  // Total price for the specified quantity
+
+      // Add the item to the cart array
+      cart.push({ productName, price, quantity, totalPrice });
+
+      // Update the cart summary
+      updateCartSummary();
+
+      alert(`${quantity} ${productName}(s) has been added to your cart. Total: ₱${totalPrice}`);
+    }
+
+    function buyNow(productName, price) {
+      alert(`You are purchasing ${productName} for ₱${price}`);
+    }
+
+    // Update the cart summary with total items and total price
+    function updateCartSummary() {
+      let totalItems = 0;
+      let totalPrice = 0;
+
+      cart.forEach(item => {
+        totalItems += item.quantity;
+        totalPrice += item.price * item.quantity;
+      });
+
+      // Update the UI
+      document.getElementById('totalItems').textContent = totalItems;
+      document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
+    }
+
+    // JavaScript to handle item deletion
+    function deleteItem(productId) {
+      const productElement = document.getElementById(productId);
+      if (productElement) {
+        deletedItems.push({ element: productElement, id: productId });
+        productElement.remove();
+
+        // Display the undo button for 5 seconds
+        const undoButton = document.createElement('button');
+        undoButton.textContent = "Undo";
+        undoButton.classList.add('undo-button');
+        undoButton.onclick = undoDelete;
+        document.body.appendChild(undoButton);
+
+        setTimeout(() => {
+          undoButton.remove();
+        }, 5000);
+      }
+    }
+
+    // Undo the deletion of the item
+    function undoDelete() {
+      const lastDeletedItem = deletedItems.pop();
+      if (lastDeletedItem) {
+        document.getElementById('productList').insertAdjacentElement('beforeend', lastDeletedItem.element);
+      }
+      document.querySelector('.undo-button').remove();
+    }
+
+    // Image Modal Logic
+    function openModal(imageSrc) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      modal.style.display = "block";
+      modalImg.src = imageSrc;
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.style.display = "none";
+    }
+  </script>
+</body>
+</html>
+
